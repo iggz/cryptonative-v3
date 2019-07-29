@@ -2,12 +2,14 @@
     display: flex;
 }
 
-img {
+.icon-container {
+    display: flex;
+    flex-direction: column;
     flex-basis: 33%;
+    justify-content: space-around;
 }
 
 .flex-col-container {
     display: flex;
     flex-direction: column;
-    /* justify-content: space-evenly; */
 }

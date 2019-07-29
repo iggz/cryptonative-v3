@@ -22,8 +22,6 @@ class BaseTemplate extends Component {
         const dims = this.getBoxDimensions(node);
         // update state to reflect this knowledge
         this.setState({ dimensions: dims });
-
-        console.log(this.props.children);
     }
 
     getBoxDimensions(node) {
