@@ -1,24 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + .1)) + min;
-}
 
-// var gradientFill = ctx.createLinearGradient(500, 0, 100, 0);
-// gradientFill.addColorStop(0, "rgba(128, 182, 244, 0.6)");
-// gradientFill.addColorStop(1, "rgba(244, 144, 128, 0.6)");
-
-
-
-const getState = () => ({
+const data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
         {
-            label: 'My First dataset',
+            label: 'Coin Name',
             fill: true,
             lineTension: 0.1,
-            backgroundColor: 'rgba(244, 144, 128, 0.8)',
+            backgroundColor: 'rgba(75,192,192,0.4)',
             borderColor: 'rgba(75,192,192,1)',
             borderCapStyle: 'butt',
             borderDash: [],
@@ -33,36 +24,41 @@ const getState = () => ({
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [getRandomInt(-1, 1), getRandomInt(-1, 1), getRandomInt(-1, 1), getRandomInt(-1, 1), getRandomInt(-1, 1), getRandomInt(-1, 1), getRandomInt(-1, 1)]
+            data: [65, 59, 80, 81, 56, 55, 40]
         }
     ]
-});
+};
 
+export default function LineChart(props) {
+    return (
+        <div style={ { position: "relative", padding: 20 } }>
+            <h2>Line Example</h2>
+            <Line data={ data } options={ {
+                responsive: true,
+                fill: true,
+                scales: {
+                    yAxes: [
+                        {
+                            gridLines: {
+                                color: '#aaa',
+                                borderDash: [1, 3],
+                            },
+                            display: false, // this will hide vertical lines
+                        },
+                    ],
+                    xAxes: [
+                        {
+                            gridLines: {
+                                color: '#aaa',
+                                borderDash: [1, 3],
+                            },
+                            display: false, // this will hide vertical lines
+                        },
+                    ],
+                },
+            } } />
+        </div>
+    );
 
-class LineChart extends Component {
-    getInitialState() {
-        return getState();
-    }
+};
 
-    componentWillMount() {
-        setInterval(() => {
-            this.setState(getState());
-        }, 2000);
-    }
-
-    render() {
-        return (
-            <>
-
-
-                <div>
-                    <h2>Line Example</h2>
-                    <Line data={ this.state } />
-                </div>
-
-            </>
-        );
-    }
-}
-
-export default LineChart;

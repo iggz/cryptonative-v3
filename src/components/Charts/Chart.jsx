@@ -3,27 +3,36 @@ import PropTypes from 'prop-types';
 import { Line } from 'react-chartjs-2';
 import { defaults } from 'react-chartjs-2';
 import { format } from 'date-fns';
-// import { getColors } from '../../utils/utils';
-// const colors = getColors();
-const colors = ['blue', 'red', 'green', 'orange', 'purple', 'white', 'black', 'yellow', 'red', 'blue', 'green']
 
 const pointBackgroundColor = '#fff';
 defaults.global.defaultFontColor = '#7C8087';
 defaults.global.defaultFontFamily = 'Lato, sans serif';
 defaults.global.defaultFontSize = 12;
-// let items = [
-//     { title: 'Views', color: colors[1].hex, fillColor: colors[8].hex },
-//     { title: 'Likes', color: colors[0].hex, fillColor: colors[7].hex },
-//     { title: 'Comments', color: colors[3].hex, fillColor: colors[9].hex },
-//     { title: 'Shares', color: colors[4].hex, fillColor: colors[10].hex }
-// ];
+
+const getColors = () => [
+    /*0*/    { "hex": "#19c4ac", "rgb": "25, 196, 172" }, // Likes
+    /*1*/    { "hex": "#18bae2", "rgb": "24, 186, 226" }, // Views
+    /*2*/    { "hex": "#eca227", "rgb": "236, 162, 39" },
+    /*3*/    { "hex": "#dc2b67", "rgb": "220, 43, 103" }, // Comments
+    /*4*/    { "hex": "#7290e8", "rgb": "114, 144, 232" }, // Shares
+    /*5*/    { "hex": "#da5c14", "rgb": "218, 92, 20" },
+    /*6*/    { "hex": "#0c6a81", "rgb": "12, 106, 129" },
+    /*7*/    { "hex": "#D1F3EE", "rgb": "209, 243, 238" }, // Likes
+    /*8*/    { "hex": "#D1F1F9", "rgb": "209, 241, 249" }, // Views
+    /*9*/    { "hex": "#F8D5E1", "rgb": "248, 213, 225" }, // Comments
+    /*10*/   { "hex": "#E3E9FA", "rgb": "227, 233, 250" }, // Shares
+    /*11*/   { "hex": "#FFFFFF", "rgb": "255 255, 255" }
+];
+
+const colors = getColors();
 
 let items = [
-    { title: 'Views', color: colors[1], fillColor: colors[8] },
-    { title: 'Likes', color: colors[0], fillColor: colors[7] },
-    { title: 'Comments', color: colors[3], fillColor: colors[9] },
-    { title: 'Shares', color: colors[4], fillColor: colors[10] }
+    { title: 'Views', color: colors[1].hex, fillColor: colors[8].hex },
+    { title: 'Likes', color: colors[0].hex, fillColor: colors[7].hex },
+    { title: 'Comments', color: colors[3].hex, fillColor: colors[9].hex },
+    { title: 'Shares', color: colors[4].hex, fillColor: colors[10].hex }
 ];
+
 //Views #D1F1F9, Likes #D1F3EE, Comments #F8D5E1, shares #E3E9FA
 const getOptions = (year) => {
     return {

@@ -35,11 +35,7 @@ function get(url) {
         });
 }
 
-console.log("get coincap", get(coincap));
-
-
 const prices = [];
-console.log("prices", prices)
 const dates = [];
 const times = [];
 
@@ -48,12 +44,13 @@ function loadCoinPrices() {
     get(url)
         .then(response => {
             // log out the status of the response
-
+            console.log("LineGraph response", response)
             let count = 0;
             // now, the prices are stored in an array of objects
             response.data.forEach(price => {
                 // get the current price
                 const priceUSD = price.priceUsd;
+
                 // extract the date & time
                 const datestring = price.date;
                 const dateAndTime = datestring.split("T");
@@ -69,12 +66,32 @@ function loadCoinPrices() {
                 // bump up the count
                 count++;
             })
+
+
             return [prices, dates, times];
         })
 }
 loadCoinPrices();
 
-console.log("loadCoinPrices", prices)
+function parseArray(prices) {
+    const returnArray = [];
+    for (let i = 0; i < prices; i++) {
+        const current_value = prices[i];
+        console.log('current_value', current_value)
+        const parsed_value = parseFloat(current_value);
+        const current_object = { i: parsed_value }
+        returnArray.push(current_object);
+    }
+    return returnArray;
+}
+
+
+console.log("parseArray", parseArray(prices));
+console.log("prices are", prices);
+const parsedPrices = parseArray(prices);
+console.log("parsedPrices", parsedPrices);
+
+
 /////////////////////////////////////////////////////////////////
 
 const getState = () => ({
@@ -110,7 +127,7 @@ export default class LineGraph extends Component {
     componentWillMount() {
         setInterval(() => {
             this.setState(getState());
-        }, 5000);
+        }, 2000);
     }
 
     componentDidMount() {
@@ -121,8 +138,6 @@ export default class LineGraph extends Component {
         this.buildChart();
     }
 
-
-
     buildChart = () => {
         const myChartRef = this.chartRef.current.getContext("2d");
         const { data, average, labels } = this.props;
@@ -131,8 +146,7 @@ export default class LineGraph extends Component {
 
         const { height: graphHeight } = myChartRef.canvas;
 
-        let gradientLine = myChartRef
-            .createLinearGradient(0, 0, 0, graphHeight);
+        let gradientLine = myChartRef.createLinearGradient(0, 0, 0, graphHeight);
         gradientLine.addColorStop(0, "rgb(12, 236, 197, 0.7)");
         gradientLine.addColorStop(1, "rgb(89, 60, 182, 0.7)");
 
@@ -140,11 +154,11 @@ export default class LineGraph extends Component {
             type: "line",
             data: {
                 //Bring in data
-                labels: [],
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
                 datasets: [
                     {
                         label: "LineGraph",
-                        data: [prices],
+                        data: [],
                         fill: true,
                         fillColor: gradientLine,
                         backgroundColor: gradientLine,

@@ -64,17 +64,17 @@ class MarketIndexRow extends Component {
             return (
                 <div className="row-div">
                     <RowBadge
-                        name={this.state.name}
-                        ticker={this.state.ticker}
+                        name={ this.state.name }
+                        ticker={ this.state.ticker }
                     />
-                    <RowItem data={data} />
+                    <RowItem data={ data } />
                 </div>
             )
         } else {
             return (
                 <div>
-                    <h1>Name: {this.state.name}</h1>
-                    <h1>Ticker: {this.state.ticker}</h1>
+                    <h1>Name: { this.state.name }</h1>
+                    <h1>Ticker: { this.state.ticker }</h1>
                 </div>
             )
         }
@@ -115,6 +115,7 @@ const processDataArray = (object) => {
             return_object.percent_change = (Math.round(percent_change * 100) / 100) + '%';
         }
     }
+
     return return_object;
 }
 
